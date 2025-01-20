@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ragistration Form</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+
 </head>
 <body>
     <div class="container">
@@ -16,40 +19,55 @@
             <div class="first-row">
                 <div class="input_box">
                     <label for="name">First Name</label>
-                    <input type="text" id="name" placeholder="Enter your First name" required>
+                    <input type="text" id="firstName" placeholder="Enter your First name">
                 </div>
                 <div class="input_box">
                     <label for="name">Last Name</label>
-                    <input type="text" id="name" placeholder="Enter your Last name" required>
+                    <input type="text" id="lastName" placeholder="Enter your Last name">
                 </div>
             </div>
             <div class="user_details">
                 <div class="input_box">
                     <label for="username">Username</label>
-                    <input type="text" id="username" placeholder="Enter your username" required>
+                    <input type="text" id="username" placeholder="Enter your username">
                 </div>
                 <div class="input_box">
                     <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email" required>
+                    <input type="email" id="email" placeholder="Enter your email">
                 </div>
                 <div class="input_box">
                     <label for="phone">Phone Number</label>
-                    <input type="number" id="phone" placeholder="(201) 555-0123" required>
+                    <input type="tel" id="phone" placeholder="Enter phone number">
                 </div>
                 <div class="input_box">
                     <label for="pass">Password</label>
-                    <input type="password" id="pass" placeholder="Enter your password" required>
+                    <input type="password" id="password" placeholder="Enter your password">
                 </div>
-                <div class="input_box">
-                    <label for="confirmPass">Short Bio</label>
-                    <textarea id="confirmPass" placeholder="Share a little information about yourself." required></textarea>
+                <div class="input_boxT">
+                    <label for="shortBio">Short Bio</label>
+                    <textarea id="shortBio" placeholder="Share a little information about yourself."></textarea>
                 </div>
             </div>
             
             <div class="reg_btn">
-                <input type="submit" value="Submit">
+                <input type="button" id="submitBtn" value="Submit" data-popup-open="popup-data">
             </div>
         </form>
     </div>
+
+    <div class="popup" data-popup="popup-data">
+        <div class="popup-inner">
+          <h2>Data Submitted Successfully</h2>
+          <div id="popupContent"></div>
+
+           <p><a href="#" data-popup-close="popup-data">Close</a></p>
+          <a href="#" class="popup-close" data-popup-close="popup-data">x</a>
+        </div>
+      </div>
+      
+
+      <script src="script.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
 </body>
 </html>
