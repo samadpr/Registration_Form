@@ -2,15 +2,18 @@
 document.addEventListener("DOMContentLoaded", function () {
     const phoneInput = document.querySelector("#phone");
 
-    const iti = intlTelInput(phoneInput,{
-        initialCountry: "auto", 
-        geoIpLookup: function (callback) {
-            fetch("https://ipapi.co/json")
-                .then((res) => res.json())
-                .then((data) => callback(data.country_code))
-                .catch(() => callback("US"));
-    },
-});
+    const iti = intlTelInput(phoneInput, {
+      initialCountry: "auto",
+      geoIpLookup: function (callback) {
+          fetch("https://ipapi.co/json")
+              .then((res) => res.json())
+              .then((data) => callback(data.country_code))
+              .catch(() => callback("US"));
+      },
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+  });
+  
+
 
 $(document).ready(function () {
     $("#submitBtn").click(function () {
@@ -49,15 +52,20 @@ $(document).ready(function () {
       }
   
       const phone = $("#phone").val().trim();
-      if (phone === "") {
-        $("#phone").after('<div class="error">Phone number is required.</div>');
-        // $("#phone").after('<div class="error">Invalid phone number format. Include country code. E.g., +1234567890</div>');
+      if (!iti.isValidNumber()) {
+        // $("#phone").after('<div class="error">Phone number is required.</div>');
+        $("#phone").after('<div class="error">Invalid phone number format. Include country code. E.g., +1234567890</div>');
         isValid = false;
     }
 
       const password = $("#password").val().trim();
-      if (password.length < 6) {
-        $("#password").after('<div class="error">Password must be at least 6 characters long.</div>');
+      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+      if (password === "") {
+        $("#password").after('<div class="error">Password is required.</div>');
+        isValid = false;
+      }
+      else if(!passwordPattern.test(password)){
+        $("#password").after('<div class="error">Password must be at least 6 characters long and include at least one uppercase letter, one lowercase letter, and one number.</div>');
         isValid = false;
       }
   
